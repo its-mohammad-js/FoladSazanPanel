@@ -70,7 +70,7 @@ function FormContext({ children, isEdit, setEdit }) {
       // };
 
       const productData = {
-        id: 3,
+        id: v4(),
         thumbnail: picUrl,
         title__en: formData.title__en,
         title__fa: formData.title__fa,
