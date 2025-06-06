@@ -15,6 +15,8 @@ function DataProvider({ children }) {
 
         const { data, error } = await supabase.from("products").select("*");
 
+        console.log(data);
+
         const mergedData = data.map((d) => ({
           ...d,
           technicalSpecs: JSON.parse(d.technicalSpecs),

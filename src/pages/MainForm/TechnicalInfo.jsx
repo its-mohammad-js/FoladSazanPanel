@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { v4 as uuidv4 } from "uuid";
 import { CgClose } from "react-icons/cg";
 import { useTranslation } from "react-i18next";
@@ -28,6 +27,7 @@ const TechnicalPropertiesInput = () => {
   const [value, setValue] = useState("");
   const [properties, setProperties] = useState([]);
   const formData = useFormData();
+  const { t } = useTranslation();
 
   useEffect(() => {
     formData.setValue(
@@ -94,6 +94,15 @@ const TechnicalPropertiesInput = () => {
         <p className="text-sm text-gray-300 mt-1">Press Enter to add</p>
       </div>
 
+      <button
+        disabled={!labelEn.trim() || !labelFa.trim() || !value.trim()}
+        onClick={() => handleSubmit({ key: "Enter" })}
+        type="button"
+        className="bg-gray-200 disabled:opacity-50 font-bold text-lg rounded-md w-full px-4 py-2"
+      >
+        {t("MainForm.addProp")}
+      </button>
+
       <div className="mt-4 gap-2 flex flex-wrap ">
         {properties.map(({ title, id }) => (
           <div
@@ -138,7 +147,7 @@ const TagInput = ({ name, label }) => {
   };
 
   return (
-    <div className="mx-auto">
+    <div className="mx-auto space-y-4">
       <label className="block mb-1 text-gray-200 font-medium">{label}</label>
       <input
         type="text"
@@ -148,6 +157,14 @@ const TagInput = ({ name, label }) => {
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
       />
+      <button
+        disabled={!inputValue.trim()}
+        onClick={() => handleKeyDown({ key: "Enter" })}
+        type="button"
+        className="bg-gray-200 disabled:opacity-50 font-bold text-lg rounded-md w-full px-4 py-2 "
+      >
+        add new {name}
+      </button>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {tags.map(({ title, id }, index) => (

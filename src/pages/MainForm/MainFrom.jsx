@@ -24,18 +24,6 @@ function MainFrom() {
           {t(`MainForm.${isEdit ? "editBtn" : "submtiBtn"}`)}
         </button>
       </div>
-
-      {/* loading screen */}
-      {/* <div
-        className={`${
-          isLoading ? "visible opacity-100" : "invisible opacity-0"
-        } absolute inset-0 flex items-center justify-center bg-gray-950/50 backdrop-blur-sm`}
-      >
-        <div className="px-12 py-2 bg-gray-200 rounded-md flex items-center gap-4 justify-center flex-col">
-          <LoaderIcon className="!size-12" />
-          <p>Laoding...</p>
-        </div>
-      </div> */}
     </FormContext>
   );
 }

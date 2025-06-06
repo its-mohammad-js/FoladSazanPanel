@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { FaPhotoFilm } from "react-icons/fa6";
 import { useFormData } from "../FormContext";
+import { v4 } from "uuid";
+import { supabase } from "../../../../supabaseClient";
 
 function ThumbnailField() {
-  const { register, errors } = useFormData();
+  const { register, errors, setLoading, setValue } = useFormData();
   const [selectedImage, setSelectedImage] = useState(null);
   const [prevImage, setPrevImage] = useState(null);
+
+  function removePicFromApp() {}
+
+  function deletePicFromDb() {}
+
+  function handleImageSelect(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+      setValue("thumbnail", file, { shouldValidate: true });
+    }
+  }
 
   return (
     <div className="col-span-full">
@@ -43,16 +58,16 @@ function ThumbnailField() {
                 htmlFor="file-upload"
                 className="relative cursor-pointer rounded-md bg-white font-bold text-gray-900 px-2 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
               >
-                <span>Upload a file</span>
+                <span className="p-2">Upload a file</span>
                 <input
                   {...register("thumbnail", {
-                    //   required: "Cover photo is required",
+                    required: "Cover photo is required",
                   })}
                   id="file-upload"
                   name="thumbnail"
                   type="file"
                   className="sr-only"
-                  // onChange={handleImageUpload}
+                  onChange={handleImageSelect}
                   accept="image/*"
                 />
               </label>
@@ -63,7 +78,7 @@ function ThumbnailField() {
         )}
       </div>
       {errors.thumbnail && (
-        <p className="text-xs text-red-500 mt-1 text-center">
+        <p className="text-red-500 mt-2 md:mt-3 text-center">
           {errors.thumbnail.message}
         </p>
       )}

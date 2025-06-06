@@ -1,6 +1,7 @@
 function ProductsLoader() {
   return [0, 2, 3, 4, 5, 6, 7, 8].map((item) => (
     <div
+      key={item}
       onClick={() => {
         navigate(`/product/${item.id}`);
         scrollTo({
@@ -8,7 +9,6 @@ function ProductsLoader() {
           behavior: "smooth",
         });
       }}
-      key={item.id}
       className="group animate-pulse"
     >
       <div className="aspect-square w-full rounded-lg bg-gray-400 object-cover group-hover:opacity-75 xl:aspect-7/8" />
