@@ -53,22 +53,6 @@ function FormContext({ children, isEdit, setEdit }) {
       setLoading(true);
       const picUrl = await uploadImageToSupabase(formData.thumbnail);
 
-      // const productData = {
-      //   id: v4(),
-      //   thumbnail: picUrl,
-      //   title: { en: formData.title__en, fa: formData.title__fa },
-      //   brand: { en: formData.brand__en, fa: formData.brand__fa },
-      //   category: { en: formData.category__en, fa: formData.category__fa },
-      //   sku: formData.sku,
-      //   description: {
-      //     en: formData.description__en,
-      //     fa: formData.description__fa,
-      //   },
-      //   size: formData.size,
-      //   color: formData.color,
-      //   technicalSpecs: JSON.stringify(formData.properties),
-      // };
-
       const productData = {
         id: v4(),
         thumbnail: picUrl,
@@ -159,7 +143,11 @@ function FormContext({ children, isEdit, setEdit }) {
         errors,
       }}
     >
-      <div className="w-full px-4 py-2 md:w-[500px] mx-auto md:py-4">
+      <div
+        className={`${
+          isLoading ? "opacity-0 invisible" : ""
+        } w-full px-4 py-2 md:w-[500px] transition-all mx-auto md:py-4`}
+      >
         {/* header */}
         <div className="flex items-center justify-between">
           <button
